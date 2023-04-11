@@ -13,8 +13,8 @@ const LandingPage = () => {
     <>
       <Seo title="CodePhrase Generator" />
       <Center flexDirection="column" h="full">
-        <VStack maxW="3xl" spacing="5">
-          <Heading size="3xl" paddingTop="132">CodePhrase Generator</Heading>
+        <VStack maxW="3xl" spacing="4">
+          <Heading size="3xl">CodePhrase Generator</Heading>
           <Text
             fontSize={{ base: 'lg', md: 'xl' }}
             maxW="2xl"

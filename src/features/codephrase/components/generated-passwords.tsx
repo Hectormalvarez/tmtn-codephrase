@@ -1,58 +1,34 @@
-import React from "react";
+import React, { useState } from "react";
+import { Stack } from "@chakra-ui/react";
 
 import { Button } from "@/components/button";
 import { InputField } from "@/components/form";
-
-import { InputGroup, InputRightElement } from "@chakra-ui/react";
-import { PhoneIcon, AddIcon, WarningIcon } from '@chakra-ui/icons'
-
+import { generateSentences } from "@/utils/generateSentences";
 
 export const GeneratedPasswords = () => {
+  const [passphrases, setPassphrases] = useState<string[]>();
+
+  const handleGeneratePassphrasesOnClick = async () => {
+    generateSentences({delimiter: "-"}).then((sentences) => {
+      if (sentences) setPassphrases(sentences);
+    });
+  };
+
   return (
-    <>
-      <Button type="submit" variant="solid">
+    <Stack spacing="8" w="full">
+      <Button onClick={handleGeneratePassphrasesOnClick} variant="solid">
         Generate New Passphrases
       </Button>
-      <InputGroup>
+      {passphrases?.map((passphrase, index) => (
         <InputField
+          key={index}
           type="text"
           variant="flushed"
           size="lg"
-          value="test"
+          value={passphrase}
           isReadOnly
         />
-        <InputRightElement>
-          <Button variant="solid">Copy</Button>
-        </InputRightElement>
-      </InputGroup>
-      <InputField
-        type="text"
-        variant="flushed"
-        size="lg"
-        value="test"
-        isReadOnly
-      />
-      <InputField
-        type="text"
-        variant="flushed"
-        size="lg"
-        value="test"
-        isReadOnly
-      />
-      <InputField
-        type="text"
-        variant="flushed"
-        size="lg"
-        value="test"
-        isReadOnly
-      />
-      <InputField
-        type="text"
-        variant="flushed"
-        size="lg"
-        value="test"
-        isReadOnly
-      />
-    </>
+      ))}
+    </Stack>
   );
 };
